@@ -1,12 +1,14 @@
 # Predicting-Myers-Briggs-Type-Indicator-with-Recurrent-Neural-Networks
 
-## Ian Scott Knight
+## Authors
+
+### Ian Scott Knight
 
 Department of Symbolic Systems, Stanford University 
 
 isknight@stanford.edu
 
-## Rayne Hernandez
+### Rayne Hernandez
 
 Department of Mathematical & Computational Science, Stanford University 
 
