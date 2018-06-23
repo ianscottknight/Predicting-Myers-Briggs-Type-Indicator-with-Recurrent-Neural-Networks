@@ -74,7 +74,7 @@ Since the tokenized posts are of highly variable lengths, it is necessary to mak
 
 For our embedding layer, we use an embedding matrix in the form of a dictionary mapping every lemmatized word (following the same process described above up to lemmatization) to the 50- dimensional GloVe representation of that word. This produces an output of size 50 for every padded input vector.
 
-#### 3.2.2 RNN
+#### 3.2.2 Recurrent Neural Network
 
 Due to the fact that our data set is composed of sequential text data, we decided to use a recurrent neural network in order to capture some of the information in the text data that would otherwise be ignored (e.g. as with a naive Bayes classifier). 
 
