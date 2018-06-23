@@ -184,7 +184,7 @@ As a real life test case of this hypothetical capability for greater abstraction
 
 <img width="395" alt="screen shot 2018-06-23 at 5 04 11 am" src="https://user-images.githubusercontent.com/25094252/41808442-20424a4a-76a3-11e8-9b0e-9c9d74df7373.png">
 
-Rounding from these numbers, our model predicts that Donald Trump’s MBTI type is ESTP, which is his true MBTI type according to MBTI experts [4]. To drive this point home, it should be noted that the ESTP archetype is known as ”the Entrepreneur”! [1] This is just one example, but it at the very least demonstrates the extensive realm of application available to text classifiers like the one we have developed.
+Rounding from these numbers, our model predicts that Donald Trump’s MBTI type is ESTP, which is his true MBTI type according to MBTI experts [4]. To drive this point home, it should be noted that the ESTP archetype is known as ”the Entrepreneur”! [1] This is just one example, but at the very least it demonstrates the expansive areas of application available to text classifiers like the one we have developed.
 
 ## 5 Conclusion
 
