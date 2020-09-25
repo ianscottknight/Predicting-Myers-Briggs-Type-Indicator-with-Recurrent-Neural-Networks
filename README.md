@@ -18,6 +18,24 @@ rayne@stanford.edu
 
 Our focus for this project is using machine learning to build a classifier capable of sorting people into their Myers-Briggs Type Index (MBTI) personality type based on text samples from their social media posts. The motivations for building such a classifier are twofold. First, the pervasiveness of social media means that such a classifier would have ample data on which to run personality assessments, allowing more people to gain access to their MBTI personality type, and perhaps far more reliably and more quickly. There is significant interest in this area within the academic realm of psychology as well as the private sector. For example, many employers wish to know more about the personality of potential hires, so as to better manage the culture of their firm. Our second motivation centers on the potential for our classifier to be more accurate than currently available tests as evinced by the fact that retest error rates for personality tests administered by trained psychologists currently hover around 0.5. That is, the there is a probability of about half that taking the test twice in two different contexts will yield different classifications. Thus, our classifier could serve as a verification system for these initial tests as a means of allowing people to have more confidence in their results. Indeed, a text-based classifier would be able to operate on a far larger amount of data than that given in a single personality test.
 
+## 0 Instructions
+
+1. Download dataset from https://www.kaggle.com/datasnaek/mbti-type
+
+2. python separate_clean_and_unclean.py
+
+3. python make_training_set.py
+
+4. python make_test_set.py
+
+5. python baseline.py
+
+6. python rnn.py
+
+7. python average_prob_predictor.py
+
+8. python "trump prediction"/predictor.py
+
 ## 1 Introduction
 
 In the scientific field of psychology, the concept of personality is considered a powerful but imprecisely defined construct. Psychologists would therefore stand to gain much from the development of more concrete, empirical measures of extant models of personality. Our project seeks to improve the understanding of one such model: the Myers-Briggs Type Indicator (MBTI). We intend to use machine learning to build a classifier that will take in text (e.g. social media posts) as input and produce as output a prediction of the MBTI personality type of the author of said text. A successful implementation of such a classifier would demonstrate a strong linguistic basis for MBTI and potentially personality in general. Furthermore, the ability to produce an accurate text-based classifier has significant potential implications for the field of psychology itself, since the connection between natural language and personality type is non-trivial [11]
