@@ -28,6 +28,7 @@ from keras.preprocessing import text
 from keras.optimizers import Adam
 
 
+MODELS_DIR = "models"
 DATA_DIR = "data"
 GLOVE_PATH = os.path.join(
     DATA_DIR, "glove.6B.50d.txt"
@@ -244,7 +245,7 @@ for k in range(len(DIMENSIONS)):
         confusion = confusion_matrix(y_test, predictions)
         score = accuracy_score(y_test, predictions)
         with open(
-            os.path.join(DATA_DIR, "rnn_accuracy_{}.txt".format(DIMENSIONS[k])), "w"
+            os.path.join(MODELS_DIR, "rnn_accuracy_{}.txt".format(DIMENSIONS[k])), "w"
         ) as f:
             f.write(
                 "*** {}/{} TEST SET CLASSIFICATION (POSTS) ***\n".format(
@@ -256,7 +257,7 @@ for k in range(len(DIMENSIONS)):
             f.write("Confusion matrix: \n")
             f.write(np.array2string(confusion, separator=", "))
         print(
-            f"Wrote training / test results for {DIMENSIONS[k]} here: {os.path.join(DATA_DIR, 'rnn_accuracy_{}.txt'.format(DIMENSIONS[k]))}"
+            f"Wrote training / test results for {DIMENSIONS[k]} here: {os.path.join(MODELS_DIR, 'rnn_accuracy_{}.txt'.format(DIMENSIONS[k]))}"
         )
 
         ### Get most a-like/b-like sentences
@@ -295,8 +296,8 @@ for k in range(len(DIMENSIONS)):
                     f.write("\n")
 
         ### Save model and tokenizer for future use
-        model.save(os.path.join(DATA_DIR, "rnn_model_{}.h5".format(DIMENSIONS[k])))
+        model.save(os.path.join(MODELS_DIR, "rnn_model_{}.h5".format(DIMENSIONS[k])))
         with open(
-            os.path.join(DATA_DIR, "tokenizer_{}.pkl".format(DIMENSIONS[k])), "wb"
+            os.path.join(MODELS_DIR, "tokenizer_{}.pkl".format(DIMENSIONS[k])), "wb"
         ) as f:
             pickle.dump(tokenizer, f, protocol=pickle.HIGHEST_PROTOCOL)

@@ -19,6 +19,7 @@ from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
 
 
+MODELS_DIR = "models"
 DATA_DIR = "data"
 DIMENSIONS = ["IE", "NS", "FT", "PJ"]
 TOP_WORDS = 2500
@@ -145,7 +146,7 @@ for k in range(len(DIMENSIONS)):
             scores_k.append(score_k)
         with open(
             os.path.join(
-                DATA_DIR, "baseline_cross_validation_{}.txt".format(DIMENSIONS[k])
+                MODELS_DIR, "baseline_cross_validation_{}.txt".format(DIMENSIONS[k])
             ),
             "w",
         ) as f:
@@ -165,7 +166,7 @@ for k in range(len(DIMENSIONS)):
     confusion = confusion_matrix(y_test, predictions)
     score = accuracy_score(y_test, predictions)
     with open(
-        os.path.join(DATA_DIR, "baseline_accuracy_{}.txt".format(DIMENSIONS[k])), "w"
+        os.path.join(MODELS_DIR, "baseline_accuracy_{}.txt".format(DIMENSIONS[k])), "w"
     ) as f:
         f.write(
             "*** {}/{} TEST SET CLASSIFICATION (POSTS) ***\n".format(
@@ -177,17 +178,17 @@ for k in range(len(DIMENSIONS)):
         f.write("Confusion matrix: \n")
         f.write(np.array2string(confusion, separator=", "))
     print(
-        f"Wrote training / test results for {DIMENSIONS[k]} here: {os.path.join(DATA_DIR, 'baseline_accuracy_{}.txt'.format(DIMENSIONS[k]))}"
+        f"Wrote training / test results for {DIMENSIONS[k]} here: {os.path.join(MODELS_DIR, 'baseline_accuracy_{}.txt'.format(DIMENSIONS[k]))}"
     )
 
     # Save model
     if SAVE_MODEL:
         pipeline.named_steps["classifier"].model.save(
-            os.path.join(DATA_DIR, "NB_classifier_{}.h5".format(DIMENSIONS[k]))
+            os.path.join(MODELS_DIR, "NB_classifier_{}.h5".format(DIMENSIONS[k]))
         )
         pipeline.named_steps["classifier"].model = None
         joblib.dump(
             pipeline,
-            os.path.join(DATA_DIR, "baseline_pipeline_{}.pkl".format(DIMENSIONS[k])),
+            os.path.join(MODELS_DIR, "baseline_pipeline_{}.pkl".format(DIMENSIONS[k])),
         )
     del pipeline
