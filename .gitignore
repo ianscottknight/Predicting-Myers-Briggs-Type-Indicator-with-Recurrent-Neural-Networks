@@ -1,3 +1,5 @@
 .DS_Store
 data
+models
 !data/.gitkeep
+!models/.gitkeep
