@@ -11,6 +11,7 @@ scikit-learn = "^0.24.1"
 nltk = "^3.5"
 Keras = "^2.4.3"
 pandas = "^1.2.1"
+tensorflow = "^2.4.1"
 
 [tool.poetry.dev-dependencies]
 pre-commit = "^2.10.0"

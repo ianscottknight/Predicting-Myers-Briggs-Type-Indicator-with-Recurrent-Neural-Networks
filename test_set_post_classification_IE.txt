@@ -1,0 +1,6 @@
+*** I/E TEST SET CLASSIFICATION (POSTS) ***
+Total posts classified: 21177
+Accuracy: 0.5076734192756293
+Confusion matrix: 
+[[10710,    17],
+ [10409,    41]]

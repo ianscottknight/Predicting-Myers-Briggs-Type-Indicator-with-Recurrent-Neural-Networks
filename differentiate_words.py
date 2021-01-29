@@ -1,11 +1,11 @@
-#!/usr/bin/env python
-
 import collections
 import re
 
-DIMENSIONS = ["IE", "NS", "FT", "PJ"]
 
-types = [
+DATA_DIR = "data"
+
+DIMENSIONS = ["IE", "NS", "FT", "PJ"]
+WORDS_TO_REMOVE = [
     "intj",
     "intp",
     "infj",
@@ -57,10 +57,14 @@ for k in range(len(DIMENSIONS)):
     wordcount_a = {}
     wordcount_b = {}
 
-    with open("extreme_examples_{}.txt".format(DIMENSIONS[k][0]), "r") as f:
+    with open(
+        os.path.join(DATA_DIR, "extreme_examples_{}.txt".format(DIMENSIONS[k][0])), "r"
+    ) as f:
         wordcount_a = collections.Counter(f.read().split())
 
-    with open("extreme_examples_{}.txt".format(DIMENSIONS[k][1]), "r") as f:
+    with open(
+        os.path.join(DATA_DIR, "extreme_examples_{}.txt".format(DIMENSIONS[k][1])), "r"
+    ) as f:
         wordcount_b = collections.Counter(f.read().split())
 
     cache = []
@@ -89,18 +93,22 @@ for k in range(len(DIMENSIONS)):
 
     regex = re.compile("[^a-zA-Z]")
 
-    with open("special_words_{}.txt".format(DIMENSIONS[k][0]), "w") as f:
+    with open(
+        os.path.join(DATA_DIR, "special_words_{}.txt".format(DIMENSIONS[k][0])), "w"
+    ) as f:
         for key in a.keys():
             mod = regex.sub("", str(key))
-            if mod not in types:
+            if mod not in WORDS_TO_REMOVE:
                 if a[key] > 2:
                     for ___ in range(a[key]):
                         f.write(mod + "\n")
 
-    with open("special_words_{}.txt".format(DIMENSIONS[k][1]), "w") as f:
+    with open(
+        os.path.join(DATA_DIR, "special_words_{}.txt".format(DIMENSIONS[k][1])), "w"
+    ) as f:
         for key in b.keys():
             mod = regex.sub("", str(key))
-            if mod not in types:
+            if mod not in WORDS_TO_REMOVE:
                 if b[key] > 2:
                     for ___ in range(b[key]):
                         f.write(mod + "\n")

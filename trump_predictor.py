@@ -11,6 +11,11 @@ from keras.preprocessing import sequence
 from keras.preprocessing import text
 from keras.models import load_model
 
+
+MODELS_DIR = "models"
+DATA_DIR = "data"
+TRUMP_TWEETS_PATH = os.path.join(DATA_DIR, "trumptweets.csv")
+
 DIMENSIONS = ["IE", "NS", "FT", "PJ"]
 MODEL_BATCH_SIZE = 128
 TOP_WORDS = 2500
@@ -20,7 +25,7 @@ EMBEDDING_VECTOR_LENGTH = 20
 final = ""
 
 x_test = []
-with open("trumptweets.csv", "r", encoding="ISO-8859-1") as f:
+with open(TRUMP_TWEETS_PATH, "r", encoding="ISO-8859-1") as f:
     reader = csv.reader(f)
     for row in f:
         x_test.append(row)
@@ -66,9 +71,13 @@ def lemmatize(x):
 
 
 for k in range(len(DIMENSIONS)):
-    model = load_model("model_{}.h5".format(DIMENSIONS[k]))
+    model = load_model(
+        os.path.join(MODELS_DIR, "rnn_model_{}.h5".format(DIMENSIONS[k]))
+    )
     tokenizer = None
-    with open("tokenizer_{}.pkl".format(DIMENSIONS[k]), "rb") as f:
+    with open(
+        os.path.join(MODELS_DIR, "rnn_tokenizer_{}.pkl".format(DIMENSIONS[k]), "rb")
+    ) as f:
         tokenizer = pickle.load(f)
 
     def preprocess(x):

@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import numpy as np
 import pandas as pd
 import csv
@@ -26,6 +24,10 @@ from keras.layers.embeddings import Embedding
 from keras.preprocessing import sequence
 from keras.preprocessing import text
 from keras.models import load_model
+
+
+MODELS_DIR = "models"
+DATA_DIR = "data"
 
 DIMENSIONS = ["IE", "NS", "FT", "PJ"]
 MODEL_BATCH_SIZE = 128
@@ -77,19 +79,23 @@ def lemmatize(x):
 for k in range(len(DIMENSIONS)):
     x_test_a = []
     x_test_b = []
-    with open("test_{}.csv".format(DIMENSIONS[k][0]), "r") as f:
+    with open(os.path.join(DATA_DIR, "test_{}.csv".format(DIMENSIONS[k][0]), "r")) as f:
         reader = csv.reader(f)
         for row in reader:
             x_test_a.append(row)
-    with open("test_{}.csv".format(DIMENSIONS[k][1]), "r") as f:
+    with open(os.path.join(DATA_DIR, "test_{}.csv".format(DIMENSIONS[k][1]), "r")) as f:
         reader = csv.reader(f)
         for row in reader:
             x_test_b.append(row)
     x_test = x_test_a + x_test_b
 
-    model = load_model("model_{}.h5".format(DIMENSIONS[k]))
+    model = load_model(
+        os.path.join(MODELS_DIR, "rnn_model_{}.h5".format(DIMENSIONS[k]))
+    )
     tokenizer = None
-    with open("tokenizer_{}.pkl".format(DIMENSIONS[k]), "rb") as f:
+    with open(
+        os.path.join(MODELS_DIR, "rnn_tokenizer_{}.pkl".format(DIMENSIONS[k]), "rb")
+    ) as f:
         tokenizer = pickle.load(f)
 
     def preprocess(x):
@@ -108,13 +114,17 @@ for k in range(len(DIMENSIONS)):
     min_prob_indices = sorted_probs[:NUM_EXTREME_EXAMPLES]
     max_prob_indices = sorted_probs[-NUM_EXTREME_EXAMPLES:]
     lemmatized = lemmatize(x_test)
-    with open("extreme_examples_{}.txt".format(DIMENSIONS[k][0]), "w") as f:
+    with open(
+        os.path.join(DATA_DIR, "extreme_examples_{}.txt".format(DIMENSIONS[k][0])), "w"
+    ) as f:
         for prob, i in min_prob_indices:
             # f.write(x_test[i]+'\n')
             f.write(lemmatized[i] + "\n")
             # f.write(str(prob)+'\n')
             f.write("\n")
-    with open("extreme_examples_{}.txt".format(DIMENSIONS[k][1]), "w") as f:
+    with open(
+        os.path.join(DATA_DIR, "extreme_examples_{}.txt".format(DIMENSIONS[k][1])), "w"
+    ) as f:
         for prob, i in max_prob_indices:
             # f.write(x_test[i]+'\n')
             f.write(lemmatized[i] + "\n")

@@ -20,21 +20,21 @@ Our focus for this project is using machine learning to build a classifier capab
 
 ## 0 Instructions
 
-1. Download dataset from https://www.kaggle.com/datasnaek/mbti-type
+1. Download dataset from https://www.kaggle.com/datasnaek/mbti-type and place here: data/mbti_1.csv
 
-2. python separate_clean_and_unclean.py
+2. Download GloVe word vectors from https://www.kaggle.com/watts2/glove6b50dtxt?select=glove.6B.50d.txt and place here: data/glove.6B.50d.txt
 
-3. python make_training_set.py
+3. Run these scripts in order to generate dataset: separate_clean_and_unclean.py, make_training_set.py, make_test_set.py
 
-4. python make_test_set.py
+4. Run baseline.py to use a naive Bayes classifier to establish a lower bound of reasonable accuracy
 
-5. python baseline.py
+5. Run rnn.py with the constants / control variables that you want.
 
-6. python rnn.py
+6. Run trump_predictor.py for fun
 
-7. python average_prob_predictor.py
+7. Run differentiate_words.py and then word_cloud.py to get data for word cloud formation for each MBTI type letter (i.e. one for I, one for E, etc.)
 
-8. python "trump prediction"/predictor.py
+8. Above all, make this your own. I developed this project when I was not very good at programming, so it is filled with bad style. Enjoy!
 
 ## 1 Introduction
 
