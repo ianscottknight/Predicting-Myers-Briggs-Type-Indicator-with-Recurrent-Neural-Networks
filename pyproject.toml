@@ -1,0 +1,19 @@
+[tool.poetry]
+name = "mbti-rnn"
+version = "0.1.0"
+description = ""
+authors = ["Ian Scott Knight <isk@alumni.stanford.edu>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+scikit-learn = "^0.24.1"
+nltk = "^3.5"
+Keras = "^2.4.3"
+
+[tool.poetry.dev-dependencies]
+pre-commit = "^2.10.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
