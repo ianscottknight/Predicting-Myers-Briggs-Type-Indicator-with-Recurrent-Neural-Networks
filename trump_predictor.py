@@ -1,5 +1,4 @@
-#!/usr/bin/env python
-
+import os
 import csv
 import pickle
 import collections
@@ -76,7 +75,7 @@ for k in range(len(DIMENSIONS)):
     )
     tokenizer = None
     with open(
-        os.path.join(MODELS_DIR, "rnn_tokenizer_{}.pkl".format(DIMENSIONS[k]), "rb")
+        os.path.join(MODELS_DIR, "rnn_tokenizer_{}.pkl".format(DIMENSIONS[k])), "rb"
     ) as f:
         tokenizer = pickle.load(f)
 

@@ -131,7 +131,7 @@ for k in range(len(DIMENSIONS)):
 
     ### Cross-validation classification (individual posts)
     if CROSS_VALIDATION:
-        k_fold = KFold(n=len(df), n_folds=6)
+        k_fold = KFold(n_splits=6)
         scores_k = []
         confusion_k = np.array([[0, 0], [0, 0]])
         for train_indices, test_indices in k_fold:

@@ -1,3 +1,4 @@
+import os
 import numpy as np
 import pandas as pd
 import csv
@@ -6,11 +7,13 @@ import pickle
 import collections
 import tensorflow as tf
 from nltk import word_tokenize
+from keras.preprocessing.text import Tokenizer
+from nltk import word_tokenize
 from nltk.stem import WordNetLemmatizer
 from nltk.corpus import stopwords
-from sklearn.externals import joblib
+import joblib
 from sklearn.pipeline import Pipeline
-from sklearn.cross_validation import KFold
+from sklearn.model_selection import KFold
 from sklearn.metrics import confusion_matrix, accuracy_score
 from keras.wrappers.scikit_learn import KerasClassifier
 from keras.models import Sequential
@@ -79,11 +82,11 @@ def lemmatize(x):
 for k in range(len(DIMENSIONS)):
     x_test_a = []
     x_test_b = []
-    with open(os.path.join(DATA_DIR, "test_{}.csv".format(DIMENSIONS[k][0]), "r")) as f:
+    with open(os.path.join(DATA_DIR, "test_{}.csv".format(DIMENSIONS[k][0])), "r") as f:
         reader = csv.reader(f)
         for row in reader:
             x_test_a.append(row)
-    with open(os.path.join(DATA_DIR, "test_{}.csv".format(DIMENSIONS[k][1]), "r")) as f:
+    with open(os.path.join(DATA_DIR, "test_{}.csv".format(DIMENSIONS[k][1])), "r") as f:
         reader = csv.reader(f)
         for row in reader:
             x_test_b.append(row)
@@ -94,7 +97,7 @@ for k in range(len(DIMENSIONS)):
     )
     tokenizer = None
     with open(
-        os.path.join(MODELS_DIR, "rnn_tokenizer_{}.pkl".format(DIMENSIONS[k]), "rb")
+        os.path.join(MODELS_DIR, "rnn_tokenizer_{}.pkl".format(DIMENSIONS[k])), "rb"
     ) as f:
         tokenizer = pickle.load(f)
 

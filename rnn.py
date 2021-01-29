@@ -30,9 +30,7 @@ from keras.optimizers import Adam
 
 MODELS_DIR = "models"
 DATA_DIR = "data"
-GLOVE_PATH = os.path.join(
-    DATA_DIR, "glove.6B.50d.txt"
-)  # download here: https://www.kaggle.com/watts2/glove6b50dtxt?select=glove.6B.50d.txt
+GLOVE_PATH = os.path.join(DATA_DIR, "glove.6B.50d.txt")
 DIMENSIONS = ["IE", "NS", "FT", "PJ"]
 
 ### Preprocessing variables
@@ -44,13 +42,13 @@ EMBEDDING_VECTOR_LENGTH = 50
 ### Learning variables
 LEARNING_RATE = 0.01
 DROPOUT = 0.1
-NUM_EPOCHS = 30
+NUM_EPOCHS = 1
 
 ### Control variables
 CROSS_VALIDATION = False
-SAMPLE = False
-WORD_CLOUD = False
-SAVE_MODEL = False
+SAMPLE = True
+WORD_CLOUD = True
+SAVE_MODEL = True
 
 
 for k in range(len(DIMENSIONS)):
@@ -200,7 +198,7 @@ for k in range(len(DIMENSIONS)):
 
         ### Cross-validation classification (individual posts)
         if CROSS_VALIDATION:
-            k_fold = KFold(n=len(x_train), n_folds=5)
+            k_fold = KFold(n_splits=6)
             scores_k = []
             confusion_k = np.array([[0, 0], [0, 0]])
             for train_indices, test_indices in k_fold:
@@ -257,7 +255,7 @@ for k in range(len(DIMENSIONS)):
             f.write("Confusion matrix: \n")
             f.write(np.array2string(confusion, separator=", "))
         print(
-            f"Wrote training / test results for {DIMENSIONS[k]} here: {os.path.join(MODELS_DIR, 'rnn_accuracy_{}.txt'.format(DIMENSIONS[k]))}"
+            f"\nWrote training / test results for {DIMENSIONS[k]} here: {os.path.join(MODELS_DIR, 'rnn_accuracy_{}.txt'.format(DIMENSIONS[k]))}\n"
         )
 
         ### Get most a-like/b-like sentences
@@ -298,6 +296,6 @@ for k in range(len(DIMENSIONS)):
         ### Save model and tokenizer for future use
         model.save(os.path.join(MODELS_DIR, "rnn_model_{}.h5".format(DIMENSIONS[k])))
         with open(
-            os.path.join(MODELS_DIR, "tokenizer_{}.pkl".format(DIMENSIONS[k])), "wb"
+            os.path.join(MODELS_DIR, "rnn_tokenizer_{}.pkl".format(DIMENSIONS[k])), "wb"
         ) as f:
             pickle.dump(tokenizer, f, protocol=pickle.HIGHEST_PROTOCOL)
